@@ -69,6 +69,18 @@ $ sudo -i
 static ipの割り当てに関しては、dhcpcd.confに書き込んだ内容がなぜか適用されない（issue1を参照、安定してないっぽい？）ので省略。
 
 # k8sのinstall
+
+[公式のinstall Documents](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)にしたがってインストールすれば良い
+```zsh
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+```
 # 参考
 [ラズパイでk8s構築する](https://esakat.github.io/esakat-blog/posts/raspberrypi-k8s-setup/)
 [ラズパイでKubernetesクラスタを構築する](https://qiita.com/sotoiwa/items/e350579d4c81c4a65260)
